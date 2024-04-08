@@ -329,6 +329,7 @@ Uint32 move_down_timer_callback(Uint32 interval, void* param) {
 class Tetris {
     SDL_Window* window = nullptr;
     SDL_Renderer* renderer = nullptr;
+    SDL_TimerID moveDownTimer;
     TetrisMap tetrisMap;
     BlockInfo blockInfo;
     bool gameOver = false;
@@ -470,6 +471,10 @@ public:
     Tetris() = default;
 
     ~Tetris() noexcept {
+	if (moveDownTimer != 0){
+            SDL_RemoveTimer(moveDownTimer);
+        }
+	    
         if (renderer != nullptr){
             SDL_DestroyRenderer(renderer);
         }
@@ -488,7 +493,7 @@ public:
         Uint32 startTime, endTime, frameTime;
         bool running = true;
         SDL_Event event;
-        SDL_TimerID moveDownTimer = SDL_AddTimer(BLOCK_AUTO_MOVE_DOWN_MILLISEC, move_down_timer_callback, nullptr);
+        moveDownTimer = SDL_AddTimer(BLOCK_AUTO_MOVE_DOWN_MILLISEC, move_down_timer_callback, nullptr);
 
         while (running) {
 		    startTime = SDL_GetTicks();
