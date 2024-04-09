@@ -423,7 +423,7 @@ class Tetris {
     void move_right() noexcept {
         blockInfo.go_right();
 
-        if (check_left_collision()){
+        if (check_right_collision()){
             blockInfo.go_left();
         }
     }
