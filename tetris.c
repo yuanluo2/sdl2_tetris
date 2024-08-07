@@ -392,9 +392,7 @@ void render_block(TetrisContext* context, int row, int col, const SDL_Color* col
 void render(TetrisContext* context) {
     int i, r, c, rotateTimes;
     Block block;
-    Block* currentBlock;
     const Pos* shape;
-    SDL_Color* color;
 
     /* using black color to clear the screen first. */
     SDL_SetRenderDrawColor(context->renderer, COLOR_BLACK.r, COLOR_BLACK.g, COLOR_BLACK.b, COLOR_BLACK.a);
